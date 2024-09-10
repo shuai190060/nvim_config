@@ -24,3 +24,39 @@ lspconfig.terraformls.setup {
   root_dir = util.root_pattern(".terraform", ".git", "*.tf"),
 }
 
+-- for golang automatically beauty
+-- Install and configure LSP for Go
+local nvim_lsp = require('lspconfig')
+
+nvim_lsp.gopls.setup({
+  on_attach = function(client, bufnr)
+    -- Enable format on save
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.go",
+        callback = function()
+          vim.lsp.buf.format({ async = true })
+        end,
+      })
+    end
+  end,
+})
+
+-- null-ls setup for gofmt or goimports
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.gofmt,    -- or use goimports
+    -- null_ls.builtins.formatting.goimports,
+  },
+})
+
+-- Auto format Go files on save
+vim.cmd [[
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePre *.go lua vim.lsp.buf.format({ async = false })
+  augroup END
+]]
+

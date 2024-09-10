@@ -16,7 +16,7 @@ return require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lua',
-    'hrsh7th/cmp-nvim-signature-help',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
     'hrsh7th/vim-vsnip'
@@ -97,5 +97,11 @@ return require('packer').startup(function(use)
 
   -- Linting for multiple languages
   use 'mfussenegger/nvim-lint'
+  -- for golang automatically beauty
+  use {
+  'jose-elias-alvarez/null-ls.nvim',
+  requires = { 'nvim-lua/plenary.nvim' }
+}
+
 end)
 

@@ -73,7 +73,7 @@ return require('packer').startup(function(use)
 
   -- Bufferline to show all open buffers
   use {
-    'akinsho/bufferline.nvim', tag = 'v3.*',
+    'akinsho/bufferline.nvim', tag = '4.6.1',
     requires = 'nvim-tree/nvim-web-devicons'
   }
 
